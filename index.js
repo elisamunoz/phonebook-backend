@@ -26,12 +26,21 @@ let persons = [
   }
 ];
 
+let personsLength = persons.length;
+console.log(personsLength);
+
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
 });
 
 app.get("/api/persons", (request, response) => {
   response.json(persons);
+});
+
+app.get("/info", (request, response) => {
+  response.send(
+    `<p>Phonebook has info for ${personsLength} people</p> <p>${new Date()}</p>`
+  );
 });
 
 const PORT = 3001;
