@@ -27,20 +27,26 @@ let persons = [
 ];
 
 let personsLength = persons.length;
-console.log(personsLength);
 
-app.get("/", (request, response) => {
+app.get("/", response => {
   response.send("<h1>Hello World!</h1>");
 });
 
-app.get("/api/persons", (request, response) => {
+app.get("/api/persons", response => {
   response.json(persons);
 });
 
-app.get("/info", (request, response) => {
+app.get("/info", response => {
   response.send(
     `<p>Phonebook has info for ${personsLength} people</p> <p>${new Date()}</p>`
   );
+});
+
+app.get("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const person = persons.find(person => person.id === id);
+
+  person ? response.json(person) : response.status(404).end();
 });
 
 const PORT = 3001;
