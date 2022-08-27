@@ -1,6 +1,17 @@
 GET http://localhost:3001/api/persons/
 
+###
 GET http://localhost:3001/info/
 
 ###
 DELETE http://localhost:3001/api/persons/4 HTTP/1.1
+
+###
+POST http://localhost:3001/api/persons HTTP/1.1
+content-type: application/json
+
+{
+  "id": 6,
+  "name": "sample ola",
+  "number": 123456
+}
