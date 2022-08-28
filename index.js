@@ -3,9 +3,11 @@ const morgan = require("morgan");
 const app = express();
 
 app.use(express.json());
+
+morgan.token("body", request => JSON.stringify(request.body));
 app.use(
   morgan(
-    ':method - :status - :url"HTTP/:http-version" - :response-time ms - :date[clf]'
+    ':method - :status - :url - "HTTP/:http-version" - :response-time ms - :body'
   )
 );
 
@@ -67,7 +69,7 @@ app.post("/api/persons", (request, response) => {
 
   if (!body.name || !body.number) {
     return response.status(400).json({
-      error: "content missing"
+      error: `content missing`
     });
   }
 
