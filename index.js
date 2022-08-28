@@ -1,7 +1,13 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 
 app.use(express.json());
+app.use(
+  morgan(
+    ':method - :status - :url"HTTP/:http-version" - :response-time ms - :date[clf]'
+  )
+);
 
 let persons = [
   {
